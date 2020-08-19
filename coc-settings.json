@@ -1,0 +1,8 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "list.source.files.excludePatterns": [
+    "**/node_modules/**",
+    "**/node_modules/**/.*",
+    "**/node_modules/**/.*/**"
+  ]
+}
