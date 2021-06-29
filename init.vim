@@ -3,13 +3,23 @@ scriptencoding utf-8
 
 "{ Vundle plugins
 set rtp+=~/.vim/bundle/Vundle.vim
+
 call vundle#begin()
+
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'prettier/vim-prettier'
 Plugin 'eslint/eslint'
+Plugin 'preservim/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'PhilRunninger/nerdtree-buffer-ops'
 
 call vundle#end()
+"}
+
+"{ Vundle settings
+let g:prettier#autoformat = 0
+let g:prettier#autoformat_require_pragma = 0
 "}
 
 "{ Builtin optional plugins
@@ -66,9 +76,9 @@ set clipboard+=unnamedplus
 set noswapfile
 
 " General tab settings
-set tabstop=4       " number of visual spaces per TAB
-set softtabstop=4   " number of spaces in tab when editing
-set shiftwidth=4    " number of spaces to use for autoindent
+set tabstop=2       " number of visual spaces per TAB
+set softtabstop=2   " number of spaces in tab when editing
+set shiftwidth=2    " number of spaces to use for autoindent
 set expandtab       " expand tab to spaces so that tabs are spaces
 
 " Set matching pairs of characters and highlight matching brackets
@@ -99,7 +109,7 @@ set cursorline
 set colorcolumn=80
 
 " Minimum lines to keep above and below cursor when scrolling
-set scrolloff=3
+set scrolloff=10
 
 " Use mouse to select and resize windows, etc.
 if has('mouse')
@@ -214,6 +224,7 @@ set nocursorcolumn
 set backspace=indent,eol,start  " Use backsapce to delete
 "}
 
+
 "{ Functions
 " Remove trailing white space, see https://vi.stackexchange.com/a/456/15292
 function! StripTrailingWhitespaces() abort
@@ -251,14 +262,15 @@ endfunction
 "}
 
 "{ Variables
-let mapleader = ' '
+let mapleader =' '
 
 " Do not load netrw by default since I do not use it, see
 " https://github.com/bling/dotvim/issues/4
-let g:loaded_netrwPlugin = 1
+" let g:loaded_netrwPlugin = 1
 
 " Do not load tohtml.vim
 let g:loaded_2html_plugin = 1
+
 "}
 
 
@@ -340,6 +352,8 @@ xnoremap ; :
 " Quicker way to open command window
 nnoremap q; q:
 
+set langmap=qq,dw,re,wr,bt,jy,fu,ui,po,\\;p,aa,ss,hd,tf,gg,yh,nj,ek,ol,i\\;,zz,xx,mc,cv,vb,kn,lm,QQ,DW,RE,WR,BT,JY,FU,UI,PO,:P,AA,SS,HD,TF,GG,YH,NJ,EK,OL,I:,ZZ,XX,MC,CV,VB,KN,LM
+
 " Quicker <Esc> in insert mode
 inoremap <silent> jk <Esc>
 
@@ -361,19 +375,11 @@ nnoremap <silent> <leader>q :x<CR>
 " Quit all opened buffers
 nnoremap <silent> <leader>Q :qa<CR>
 " Explore easier
-nnoremap <silent> <leader>e :Explore<CR>
+nnoremap <silent> <leader>e :NERDTreeToggle<CR>
 " Navigate panes easier
 nnoremap <Leader>a <C-w>
-
-" Navigation in the location and quickfix list
-nnoremap [l :lprevious<CR>zv
-nnoremap ]l :lnext<CR>zv
-nnoremap [L :lfirst<CR>zv
-nnoremap ]L :llast<CR>zv
-nnoremap [q :cprevious<CR>zv
-nnoremap ]q :cnext<CR>zv
-nnoremap [Q :cfirst<CR>zv
-nnoremap ]Q :clast<CR>zv
+" Fullscreen individual tabs
+nnoremap <Leader>ww :ZoomWin<CR>
 
 " Close location list or quickfix list if they are present,
 " see https://superuser.com/q/355325/736190
@@ -500,11 +506,6 @@ nnoremap <silent> <leader><Space> :call StripTrailingWhitespaces()<CR>
 if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
-
-nnoremap <up> :echoerr "Don't use arrow keys, use H, J, K, L instead!"<CR>
-nnoremap <down> :echoerr "Don't use arrow keys, use H, J, K, L instead!"<CR>
-nnoremap <right> :echoerr "Don't use arrow keys, use H, J, K, L instead!"<CR>
-nnoremap <left> :echoerr "Don't use arrow keys, use H, J, K, L instead!"<CR>
 "}
 
 "{ UI settings
